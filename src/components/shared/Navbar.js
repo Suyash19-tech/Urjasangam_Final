@@ -1,58 +1,66 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FiVolume2, FiVolumeX, FiMenu, FiX } from 'react-icons/fi'
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiVolume2, FiVolumeX, FiMenu, FiX } from "react-icons/fi";
+import Image from "next/image";
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isSoundOn, setIsSoundOn] = useState(true)
-  const [activeSection, setActiveSection] = useState('home')
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSoundOn, setIsSoundOn] = useState(true);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-      
+      setIsScrolled(window.scrollY > 50);
+
       // Detect active section
-      const sections = ['home', 'about', 'events', 'gallery', 'timeline', 'contact']
+      const sections = [
+        "home",
+        "about",
+        "events",
+        "gallery",
+        "timeline",
+        "contact",
+      ];
       for (const section of sections) {
-        const element = document.getElementById(section)
+        const element = document.getElementById(section);
         if (element) {
-          const rect = element.getBoundingClientRect()
+          const rect = element.getBoundingClientRect();
           if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section)
-            break
+            setActiveSection(section);
+            break;
           }
         }
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
-    { href: '#about', label: 'About' },
-    { href: '#events', label: 'Events' },
-    { href: '#gallery', label: 'Gallery' },
-    { href: '#timeline', label: 'Fest Week' },
-    { href: '#contact', label: 'Contact' },
-  ]
+    { href: "#about", label: "About" },
+    { href: "#events", label: "Events" },
+    { href: "#gallery", label: "Gallery" },
+    { href: "#timeline", label: "Fest Week" },
+    { href: "#contact", label: "Contact" },
+  ];
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   const handleNavClick = () => {
-    setIsMobileMenuOpen(false)
-  }
+    setIsMobileMenuOpen(false);
+  };
 
   const toggleSound = () => {
-    setIsSoundOn(!isSoundOn)
+    setIsSoundOn(!isSoundOn);
     // Add your sound toggle logic here
-  }
+  };
 
   return (
     <>
@@ -60,11 +68,11 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-500 ${
           isScrolled
-            ? 'bg-black/95 backdrop-blur-2xl border-b border-white/10 py-3'
-            : 'bg-black/60 backdrop-blur-md py-4'
+            ? "bg-black/30 backdrop-blur-xl border-b border-white/5 py-3"
+            : "bg-transparent backdrop-blur-sm py-4"
         }`}
       >
         <div className="max-w-[95%] mx-auto flex justify-between items-center px-4 md:px-8">
@@ -77,26 +85,23 @@ export default function Navbar() {
             >
               {/* Flame Icon */}
               <div className="relative w-10 h-10 md:w-12 md:h-12">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute inset-0 bg-gradient-to-t from-orange-500 via-red-500 to-yellow-500 rounded-full blur-lg"
+                <Image
+                  src="/photos/UrjaSangam/urjasangam_logo_background.png"
+                  alt="Urjasangam Logo"
+                  width={200}
+                  height={200}
                 />
-                <div className="relative z-10 text-3xl md:text-4xl">🔥</div>
               </div>
             </motion.div>
-            <span className="hidden md:block font-exo text-xl md:text-2xl font-black tracking-wider bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 bg-clip-text text-transparent group-hover:from-yellow-500 group-hover:via-red-500 group-hover:to-orange-500 transition-all duration-500">
+            {/* <span className="hidden md:block font-exo text-xl md:text-2xl font-black tracking-wider bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 bg-clip-text text-transparent group-hover:from-yellow-500 group-hover:via-red-500 group-hover:to-orange-500 transition-all duration-500">
               URJA SANGAM
-            </span>
+            </span> */}
           </Link>
 
           {/* Desktop Navigation */}
           <ul className="hidden lg:flex gap-2 items-center">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.href.replace('#', '')
+              const isActive = activeSection === link.href.replace("#", "");
               return (
                 <motion.li
                   key={link.href}
@@ -106,49 +111,54 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     className={`relative px-6 py-2 font-medium text-sm uppercase tracking-wider transition-all duration-300 ${
-                      isActive ? 'text-white' : 'text-gray-400 hover:text-white'
+                      isActive ? "text-white" : "text-gray-400 hover:text-white"
                     }`}
                     onClick={handleNavClick}
                   >
                     {link.label}
-                    
+
                     {/* Animated Background on Hover */}
                     <motion.span
                       className="absolute inset-0 rounded-lg -z-10"
                       initial={{ opacity: 0 }}
-                      whileHover={{ 
+                      whileHover={{
                         opacity: 1,
-                        background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(168, 85, 247, 0.2))',
+                        background:
+                          "linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(168, 85, 247, 0.2))",
                       }}
                       transition={{ duration: 0.3 }}
                     />
-                    
+
                     {/* Active Indicator */}
                     {isActive && (
                       <motion.span
                         layoutId="activeSection"
                         className="absolute inset-0 rounded-lg bg-gradient-to-r from-orange-500/20 via-red-500/20 to-purple-500/20 border border-orange-500/30 -z-10"
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 30,
+                        }}
                       />
                     )}
-                    
+
                     {/* Bottom Line on Hover */}
                     <motion.span
                       className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-orange-500 via-red-500 to-purple-500"
                       initial={{ width: 0 }}
-                      whileHover={{ width: '100%' }}
+                      whileHover={{ width: "100%" }}
                       transition={{ duration: 0.3 }}
                     />
                   </a>
                 </motion.li>
-              )
+              );
             })}
           </ul>
 
           {/* Right Side Icons */}
           <div className="flex items-center gap-4">
             {/* Sound Toggle */}
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.1, rotate: 15 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleSound}
@@ -180,11 +190,11 @@ export default function Navbar() {
               </AnimatePresence>
               
               {/* Glow Effect */}
-              <motion.div
+            {/* <motion.div
                 className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500 to-red-500 opacity-0 group-hover:opacity-20 blur-md -z-10"
                 whileHover={{ scale: 1.5 }}
               />
-            </motion.button>
+            </motion.button> */}
 
             {/* Mobile Menu Toggle */}
             <motion.button
@@ -234,13 +244,13 @@ export default function Navbar() {
               className="lg:hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[998]"
               onClick={toggleMobileMenu}
             />
-            
+
             {/* Menu Panel */}
             <motion.div
-              initial={{ x: '100%' }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="lg:hidden fixed top-0 right-0 bottom-0 w-[280px] bg-black/98 backdrop-blur-2xl border-l border-white/10 z-[999] overflow-y-auto"
             >
               <div className="p-8">
@@ -259,7 +269,8 @@ export default function Navbar() {
                 {/* Mobile Links */}
                 <ul className="flex flex-col gap-2">
                   {navLinks.map((link, index) => {
-                    const isActive = activeSection === link.href.replace('#', '')
+                    const isActive =
+                      activeSection === link.href.replace("#", "");
                     return (
                       <motion.li
                         key={link.href}
@@ -270,21 +281,21 @@ export default function Navbar() {
                         <a
                           href={link.href}
                           className={`block px-6 py-4 rounded-lg font-medium text-base uppercase tracking-wider transition-all ${
-                            isActive 
-                              ? 'bg-gradient-to-r from-orange-500/20 via-red-500/20 to-purple-500/20 border border-orange-500/30 text-white' 
-                              : 'text-gray-400 hover:text-white hover:bg-white/5'
+                            isActive
+                              ? "bg-gradient-to-r from-orange-500/20 via-red-500/20 to-purple-500/20 border border-orange-500/30 text-white"
+                              : "text-gray-400 hover:text-white hover:bg-white/5"
                           }`}
                           onClick={handleNavClick}
                         >
                           {link.label}
                         </a>
                       </motion.li>
-                    )
+                    );
                   })}
                 </ul>
 
                 {/* Mobile Bottom Section */}
-                <div className="mt-12 pt-8 border-t border-white/10">
+                {/* <div className="mt-12 pt-8 border-t border-white/10">
                   <div className="flex items-center justify-between px-6">
                     <span className="text-gray-400 text-sm">Sound</span>
                     <motion.button
@@ -301,12 +312,12 @@ export default function Navbar() {
                       />
                     </motion.button>
                   </div>
-                </div>
+                </div> */}
               </div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }

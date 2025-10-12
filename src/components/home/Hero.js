@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
+import Link from 'next/link'
 
 export default function Hero({ onRegisterClick }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -124,7 +125,7 @@ export default function Hero({ onRegisterClick }) {
       x: 0,
       y: 0, 
       z: 0,
-      duration: 5,
+      duration: 2,
       ease: 'power3.in',
       stagger: 0.08
     })
@@ -252,9 +253,9 @@ export default function Hero({ onRegisterClick }) {
           transition={{ type: 'spring', stiffness: 100, damping: 20 }}
         >
           <h1
-            className="font-exo font-black tracking-[0.15em] mb-4 relative"
+            className="font-exo  font-black tracking-[0.15em] mb-4 relative"
             style={{
-              fontSize: 'clamp(2.5rem, 8vw, 7rem)',
+              fontSize: 'clamp(3.8rem, 8vw, 7rem)',
               background: 'linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7b731, #5f27cd, #00d2d3)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -274,7 +275,7 @@ export default function Hero({ onRegisterClick }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
             className="text-text-dim tracking-[0.3em] uppercase mb-12"
-            style={{ fontSize: 'clamp(0.9rem, 2vw, 1.3rem)' }}
+            style={{ fontSize: 'clamp(1.2rem, 2vw, 1.3rem)' }}
           >
           Fusion of Engergies
           </motion.p>
@@ -290,7 +291,7 @@ export default function Hero({ onRegisterClick }) {
             transition={{ delay: 1, duration: 1 }}
             className="flex gap-4 md:gap-8 justify-center flex-wrap mt-12"
           >
-            <motion.button
+           <Link href={"https://unstop.com/college-fests/urjasangam-2k25-the-annual-fest-of-rgipt-rajiv-gandhi-institute-of-petroleum-technology-rgipt-jais-uttar-pradesh-403716"}> <motion.button
               whileHover={{ 
                 scale: 1.05, 
                 y: -5,
@@ -298,7 +299,7 @@ export default function Hero({ onRegisterClick }) {
               }}
               whileTap={{ scale: 0.95 }}
               onClick={onRegisterClick}
-              className="px-8 md:px-12 py-8 md:py-5 text-lg md:text-xl font-semibold rounded-full bg-gradient-to-r from-energia to-urjotsav text-white shadow-[0_10px_40px_rgba(147,51,234,0.4)] transition-all relative overflow-hidden group"
+              className="px-12 cursor-pointer md:px-12 py-4 md:py-5 text-2xl md:text-xl font-semibold rounded-full bg-gradient-to-r from-energia to-urjotsav text-white shadow-[0_10px_40px_rgba(147,51,234,0.4)] transition-all relative overflow-hidden group"
             >
               <span className="relative z-10">Register Now</span>
               <motion.div
@@ -307,7 +308,7 @@ export default function Hero({ onRegisterClick }) {
                 whileHover={{ scale: 2, opacity: 1 }}
                 transition={{ duration: 0.6 }}
               />
-            </motion.button>
+            </motion.button></Link>
 
             <motion.a
               href="#timeline"

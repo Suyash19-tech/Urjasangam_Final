@@ -1,11 +1,13 @@
+'use client';
 import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 
 // Data for the slides
 const fests = [
-    { name: 'Energia', className: 'energia', image: 'https://images.unsplash.com/photo-1565992441121-4367c2967103?auto=format&fit=crop&w=800&q=80' },
-    { name: 'Urjotsav', className: 'urjotsav', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80' },
-    { name: 'Souardhya', className: 'souardhya', image: 'https://images.unsplash.com/photo-1593113616828-f7c8717855b3?auto=format&fit=crop&w=800&q=80' },
-    { name: 'Kaltarang', className: 'kaltarang', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80' }
+    { name: 'Energia', className: 'energia', image: 'https://images.unsplash.com/photo-1565992441121-4367c2967103?auto=format&fit=crop&w=800&q=80', route: '/energia' },
+    { name: 'Urjotsav', className: 'urjotsav', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80', route: '/urjotsav' },
+    { name: 'Souardhya', className: 'souardhya', image: 'https://images.unsplash.com/photo-1593113616828-f7c8717855b3?auto=format&fit=crop&w=800&q=80', route: '/souardhya' },
+    { name: 'Kaltarang', className: 'kaltarang', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80', route: '/kaltarang' }
 ];
 
 // CSS specific to this component
@@ -310,6 +312,7 @@ const styles = `
 `;
 
 const FestSlider = () => {
+    const router = useRouter();
     const [currentIndex, setCurrentIndex] = useState(0);
     const autoplayInterval = useRef(null);
 
@@ -341,7 +344,11 @@ const FestSlider = () => {
     };
 
     const handleCardClick = (index) => {
-        if (index !== currentIndex) {
+        if (index === currentIndex) {
+            // If clicking the active card, navigate to its page
+            router.push(fests[index].route);
+        } else {
+            // If clicking prev/next card, make it active
             stopAutoplay();
             updateSlider(index);
             setTimeout(startAutoplay, 3000);
@@ -351,7 +358,7 @@ const FestSlider = () => {
     return (
         <section className="section fest-section" id="fests">
             <style>{styles}</style>
-            <h2 className="section-title">THE FOUR STONES</h2>
+            <h2 className="section-title">THE FOUR REALMS</h2>
             <p className="section-desc">Harness the power of cosmic convergence. Hover to pause.</p>
             <div 
                 className="fest-slider-wrapper"
