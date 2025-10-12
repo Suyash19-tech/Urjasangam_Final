@@ -1,20 +1,17 @@
 'use client'
 
-import Hero from '@/components/home/Hero'
-import About from '@/components/home/About'
-import FestSlider from '@/components/home/FestSlider'
-import Gallery from '@/components/home/Gallery'
-import Timeline from '@/components/home/Timeline'
-import FAQ from '@/components/home/FAQ'
-import Sponsors from '@/components/home/Sponsors'
+import { useState, useEffect } from 'react'
+import KaltarangHero from '@/components/kaltarang/KaltarangHero'
+import KaltarangEvents from '@/components/kaltarang/KaltarangEvents'
+import KaltarangTimeline from '@/components/kaltarang/KaltarangTimeline'
+import KaltarangGallery from '@/components/kaltarang/KaltarangGallery'
 import Contact from '@/components/home/Contact'
 import RegistrationModal from '@/components/shared/RegistrationModal'
-import { useState, useEffect } from 'react'
 
-export default function HomePage() {
+export default function KaltarangPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Update scroll progress
+  // Update scroll progress bar
   useEffect(() => {
     const handleScroll = () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop
@@ -32,14 +29,11 @@ export default function HomePage() {
 
   return (
     <>
-      <Hero onRegisterClick={() => setIsModalOpen(true)} />
-      <About />
-      <FestSlider />
-      <Gallery />
-      <Timeline />
-      <FAQ />
-      <Sponsors />
-      <Contact />
+      <KaltarangHero onRegisterClick={() => setIsModalOpen(true)} />
+      <KaltarangEvents />
+      <KaltarangTimeline />
+      <KaltarangGallery />
+      {/* <Contact /> */}
       <RegistrationModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
