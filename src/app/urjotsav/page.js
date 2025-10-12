@@ -13,7 +13,7 @@ import { StatsSection } from "@/components/urjotsav/StatsSection";
 import { EventsSection } from "@/components/urjotsav/EventsSection";
 import { PastEventsSection } from "@/components/urjotsav/PastEventsSection";
 import { GallerySection } from "@/components/urjotsav/GallerySection";
-import { FestWeekSection } from "@/components/urjotsav/FestWeekSection";
+import  FestWeekSection  from "@/components/urjotsav/FestWeekSection";
 
 // Add the 'default' keyword here to fix the export error
 export default function UrjotsavPage() {

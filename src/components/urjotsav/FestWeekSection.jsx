@@ -1,271 +1,242 @@
-"use client"
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+export default function FestWeekSection() {
+  const [activeCard, setActiveCard] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef(null);
 
-export function FestWeekSection() {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-
-  const otherFestsData = [
-    { 
-      name: "Kaltarang", 
-      theme: "Cultural Fest", 
-      desc: "The arena of creativity and cultural expression where art meets innovation.",
+  const festivals = [
+    {
+      id: 1,
+      name: "Kaltarang",
+      tagline: "Where Art Meets Soul",
+      description:
+        "Immerse yourself in a kaleidoscope of cultural brilliance. Dance, drama, and artistic expression collide.",
       icon: "🎭",
-      gradient: "from-cyan-500 to-blue-600",
-      color: "cyan"
+      gradient: "from-[#FF6B6B] to-[#FF8E53]",
+      color: "#FF6B6B",
+      stats: [
+        { label: "Artists", value: "500+" },
+        { label: "Performances", value: "40+" },
+        { label: "Days", value: "3" },
+      ],
     },
-    { 
-      name: "Energia", 
-      theme: "Sports Fest", 
-      desc: "The arena of raw power and physical prowess where champions are forged.",
+    {
+      id: 2,
+      name: "Energia",
+      tagline: "Unleash The Champion Within",
+      description:
+        "Feel the adrenaline surge through athletic prowess. Where legends are born and records shattered.",
       icon: "⚡",
-      gradient: "from-blue-500 to-indigo-600",
-      color: "blue"
+      gradient: "from-[#4ECDC4] to-[#44A08D]",
+      color: "#4ECDC4",
+      stats: [
+        { label: "Athletes", value: "2000+" },
+        { label: "Sports", value: "25+" },
+        { label: "Days", value: "2" },
+      ],
     },
-    { 
-      name: "Sauhardya", 
-      theme: "Social Fest", 
-      desc: "Connecting communities for a greater good and building lasting bonds.",
+    {
+      id: 3,
+      name: "Sauhardya",
+      tagline: "Unity In Diversity",
+      description:
+        "Building bridges through social initiatives. A celebration of humanity, compassion, and collective growth.",
       icon: "🤝",
-      gradient: "from-sky-500 to-blue-600",
-      color: "sky"
+      gradient: "from-[#A78BFA] to-[#7C3AED]",
+      color: "#A78BFA",
+      stats: [
+        { label: "Communities", value: "50+" },
+        { label: "Initiatives", value: "15+" },
+        { label: "Impact", value: "∞" },
+      ],
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1]
-      }
-    }
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section 
-      id="fest-week" 
-      ref={sectionRef}
-      className="py-20 text-white relative overflow-hidden"
+    <div
+      ref={containerRef}
+      className="relative min-h-screen  overflow-hidden py-20 px-4 sm:px-8"
     >
-      {/* Animated Background Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute w-[500px] h-[500px] rounded-full blur-3xl"
+      {/* Floating particles */}
+      {[...Array(20)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full bg-white opacity-30 animate-[float_6s_ease-in-out_infinite]"
           style={{
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, transparent 70%)',
-            top: '20%',
-            left: '-10%',
+            width: `${Math.random() * 4 + 2}px`,
+            height: `${Math.random() * 4 + 2}px`,
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 2}s`,
           }}
         />
-        <motion.div 
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
-          }}
-          className="absolute w-[500px] h-[500px] rounded-full blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%)',
-            bottom: '20%',
-            right: '-10%',
-          }}
-        />
+      ))}
+
+      {/* Header Section */}
+      <div
+        className={`text-center transition-all duration-1000 ${
+          isVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-10"
+        }`}
+      >
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
+          <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+          <span className="text-xs tracking-widest text-white/80 font-semibold">
+            FEST WEEK 2025
+          </span>
+        </div>
+
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white mb-4 leading-tight">
+          Experience The
+          <br />
+          <span className="bg-gradient-to-r from-[#FF6B6B] via-[#4ECDC4] to-[#A78BFA] bg-clip-text text-transparent">
+            Ultimate Convergence
+          </span>
+        </h1>
+
+        <p className="text-white/60 max-w-2xl mx-auto text-lg leading-relaxed">
+          Three legendary festivals. One unforgettable journey. Dive into a
+          world where culture, sports, and social impact unite.
+        </p>
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
-          transition={{ duration: 0.8 }}
-          className="mb-16"
-        >
-          {/* Transparent Glass Container */}
-          <div className="relative inline-block px-8 py-6 rounded-3xl mb-8">
-            <div className="absolute inset-0 bg-white/[0.02] backdrop-blur-3xl rounded-3xl border border-white/10 shadow-2xl shadow-cyan-500/10" />
-            
-            <div className="relative z-10">
-              <motion.h2 
-                className="text-5xl md:text-7xl font-black mb-4 tracking-tight"
-                style={{
-                  background: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 25%, #0ea5e9 50%, #60a5fa 75%, #06b6d4 100%)',
-                  backgroundSize: '200% 100%',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  filter: 'drop-shadow(0 0 40px rgba(6, 182, 212, 0.6))',
-                }}
-                animate={{
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-              >
-                The Fest Week Conquest
-              </motion.h2>
-              
-              <motion.div 
-                className="w-24 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 rounded-full mx-auto shadow-lg shadow-cyan-400/50"
-                initial={{ width: 0 }}
-                animate={isInView ? { width: 96 } : { width: 0 }}
-                transition={{ duration: 1, delay: 0.3 }}
-              />
-            </div>
-          </div>
-
-          <motion.p
-            className="text-xl text-cyan-200/80 max-w-3xl mx-auto drop-shadow-lg"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+      {/* Cards Grid */}
+      <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+        {festivals.map((fest, i) => (
+          <div
+            key={fest.id}
+            onMouseEnter={() => setActiveCard(fest.id)}
+            onMouseLeave={() => setActiveCard(null)}
+            className={`relative rounded-3xl p-8 border border-white/10 backdrop-blur-xl bg-white/[0.05] hover:-translate-y-3 transition-all duration-500 overflow-hidden shadow-xl ${
+              isVisible ? "animate-[slideIn_0.8s_ease-out_forwards]" : ""
+            }`}
+            style={{ animationDelay: `${i * 0.2}s` }}
           >
-            Experience the complete saga across all fest realms
-          </motion.p>
-        </motion.div>
+            {/* Accent bar */}
+            <div
+              className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${fest.gradient}`}
+            />
 
-        {/* Fest Cards Grid */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
-          {otherFestsData.map((fest, index) => (
-            <motion.div
-              key={fest.name}
-              variants={itemVariants}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="relative group cursor-pointer"
-            >
-              {/* Border Glow Only - Shows on Hover */}
-              <div 
-                className={`absolute -inset-0.5 bg-gradient-to-r ${fest.gradient} rounded-3xl blur-md transition-all duration-500 ${
-                  hoveredIndex === index ? 'opacity-100' : 'opacity-0'
+            {/* Icon */}
+            <div className="relative w-20 h-20 mb-6 flex items-center justify-center text-5xl">
+              <div
+                className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${fest.gradient} opacity-20`}
+              ></div>
+              <span
+                className={`relative transition-transform duration-300 ${
+                  activeCard === fest.id ? "scale-110 rotate-6" : ""
                 }`}
-              />
+              >
+                {fest.icon}
+              </span>
+            </div>
 
-              {/* Ultra Transparent Glass Card */}
-              <div className="relative bg-white/[0.03] backdrop-blur-3xl p-8 rounded-3xl border border-white/20 transition-all duration-500 shadow-2xl overflow-hidden">
+            {/* Title & Desc */}
+            <h3
+              className={`text-3xl font-extrabold mb-2 bg-gradient-to-r ${fest.gradient} bg-clip-text text-transparent`}
+            >
+              {fest.name}
+            </h3>
+            <p className="text-white/70 font-semibold mb-2">{fest.tagline}</p>
+            <p className="text-white/60 text-sm leading-relaxed mb-6">
+              {fest.description}
+            </p>
 
-                {/* Icon - Static, No Glow */}
-                <div className="text-7xl mb-6 relative z-10">
-                  <span className="relative">{fest.icon}</span>
-                </div>
-
-                {/* Fest Name */}
-                <h3 
-                  className={`text-3xl font-black mb-2 relative z-10 bg-gradient-to-r ${fest.gradient} bg-clip-text text-transparent`}
-                >
-                  {fest.name}
-                </h3>
-
-                {/* Theme Badge */}
-                <div className="inline-block mb-4 relative z-10">
-                  <div className="px-4 py-1 bg-white/10 backdrop-blur-xl rounded-full border border-white/30">
-                    <p className={`text-sm font-bold bg-gradient-to-r ${fest.gradient} bg-clip-text text-transparent`}>
-                      {fest.theme}
-                    </p>
+            {/* Stats */}
+            <div className="grid grid-cols-3 border-y border-white/10 py-4 mb-6">
+              {fest.stats.map((stat, idx) => (
+                <div key={idx} className="text-center group cursor-default">
+                  <div
+                    className="text-xl font-extrabold"
+                    style={{ color: fest.color }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-white/60 uppercase tracking-wider">
+                    {stat.label}
                   </div>
                 </div>
+              ))}
+            </div>
 
-                {/* Description */}
-                <p className="text-cyan-100/70 mb-6 relative z-10 leading-relaxed">
-                  {fest.desc}
-                </p>
-
-                {/* Explore Button - No Dynamic Shadow */}
-                <motion.a
-                  href="#"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`relative inline-block px-8 py-3 bg-gradient-to-r ${fest.gradient} rounded-full font-bold text-white shadow-lg transition-all duration-300 z-10`}
-                >
-                  <span className="relative z-10">Explore {fest.name}</span>
-                </motion.a>
-
-                {/* Decorative Glass Elements */}
-                <div className="absolute top-4 right-4 w-12 h-12 opacity-20">
-                  <div className="absolute inset-0 border-t-2 border-r-2 border-white/40 rounded-tr-xl" />
-                </div>
-                <div className="absolute bottom-4 left-4 w-12 h-12 opacity-20">
-                  <div className="absolute inset-0 border-b-2 border-l-2 border-white/40 rounded-bl-xl" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Bottom Info Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="mt-16"
-        >
-          <div className="relative inline-block px-10 py-6 rounded-2xl">
-            <div className="absolute inset-0 bg-white/[0.02] backdrop-blur-3xl rounded-2xl border border-white/10 shadow-xl" />
-            <p className="relative z-10 text-cyan-200/80 text-lg">
-              🎉 Join us for an unforgettable journey through all fest realms
-            </p>
+            {/* CTA Button */}
+            <button
+              className={`w-full py-3 rounded-xl border-2 font-semibold text-sm transition-all duration-300 flex justify-center items-center gap-2 ${
+                activeCard === fest.id
+                  ? `bg-gradient-to-r ${fest.gradient} text-black`
+                  : "border-white/30 text-white hover:bg-white/10"
+              }`}
+            >
+              Explore {fest.name} →
+            </button>
           </div>
-        </motion.div>
-
-        {/* Floating Particles */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 rounded-full bg-cyan-400/40 backdrop-blur-sm"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [-20, 20, -20],
-              x: [-10, 10, -10],
-              opacity: [0.2, 0.6, 0.2],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: Math.random() * 2,
-            }}
-          />
         ))}
       </div>
-    </section>
+
+      {/* Bottom CTA */}
+      <div
+        className={`text-center mt-24 transition-all duration-1000 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
+      >
+        <div className="max-w-2xl mx-auto rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-10">
+          <h3 className="text-3xl font-extrabold text-white mb-3">
+            Ready for the adventure?
+          </h3>
+          <p className="text-white/60 mb-8">
+            Register now and be part of something extraordinary
+          </p>
+          <button className="relative px-10 py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-[#FF6B6B] via-[#4ECDC4] to-[#A78BFA] text-black shadow-lg hover:scale-105 transition-transform overflow-hidden">
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-[shine_3s_ease-in-out_infinite]" />
+            Register for Fest Week
+          </button>
+        </div>
+      </div>
+
+      {/* Animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes shine {
+          0% {
+            left: -100%;
+          }
+          100% {
+            left: 100%;
+          }
+        }
+      `}</style>
+    </div>
   );
 }
