@@ -13,7 +13,6 @@ export function HeroSection() {
       id="hero"
       className="h-screen w-full flex flex-col justify-center items-center text-center overflow-hidden relative"
     >
-      {/* Video Background */}
       {/* Video Background - Scaled to hide watermark */}
       <video
         id="hero-video"
@@ -26,14 +25,15 @@ export function HeroSection() {
         muted
         loop
         playsInline
-        src="videos/Kaltarang/kaltarangback.mp4"
+        src="videos/Souhardya/kaltarangback.mp4"
       />
+      
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/40 z-10" />
 
       {/* Main Content */}
       <div className="relative z-20">
-        {/* Title with Gradient Only */}
+        {/* Title with Orange Gradient */}
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,13 +41,13 @@ export function HeroSection() {
           className="text-5xl md:text-9xl lg:text-[12rem] font-black uppercase tracking-widest"
           style={{
             background:
-              "linear-gradient(135deg, #ef4444 0%, #dc2626 25%, #f87171 50%, #fb923c 75%, #ef4444 100%)",
+              "linear-gradient(135deg, #f97316 0%, #ea580c 25%, #fb923c 50%, #fdba74 75%, #f97316 100%)",
             backgroundSize: "200% 100%",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
         >
-          KALTARANG
+          SOUHARDYA
         </motion.h1>
 
         {/* Subtitle */}
@@ -55,9 +55,9 @@ export function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="text-xl md:text-2xl mt-4 text-red-200 tracking-wider"
+          className="text-xl md:text-2xl mt-4 text-orange-200 tracking-wider"
         >
-          Innovation & Technology Converge
+          Connecting Communities for Good
         </motion.p>
       </div>
 

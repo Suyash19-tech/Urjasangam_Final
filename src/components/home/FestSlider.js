@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 const fests = [
     { name: 'Energia', className: 'energia', image: 'https://images.unsplash.com/photo-1565992441121-4367c2967103?auto=format&fit=crop&w=800&q=80', route: '/energia' },
     { name: 'Urjotsav', className: 'urjotsav', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80', route: '/urjotsav' },
-    { name: 'Souardhya', className: 'souardhya', image: 'https://images.unsplash.com/photo-1593113616828-f7c8717855b3?auto=format&fit=crop&w=800&q=80', route: '/souardhya' },
+    { name: 'Souardhya', className: 'souardhya', image: 'https://images.unsplash.com/photo-1593113616828-f7c8717855b3?auto=format&fit=crop&w=800&q=80', route: '/souhardya' },
     { name: 'Kaltarang', className: 'kaltarang', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80', route: '/kaltarang' }
 ];
 
