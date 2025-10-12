@@ -38,7 +38,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="text-7xl md:text-9xl lg:text-[12rem] font-black uppercase tracking-widest"
+          className="text-5xl md:text-9xl lg:text-[12rem] font-black uppercase tracking-widest"
           style={{
             background:
               "linear-gradient(135deg, #06b6d4 0%, #3b82f6 25%, #0ea5e9 50%, #60a5fa 75%, #06b6d4 100%)",
