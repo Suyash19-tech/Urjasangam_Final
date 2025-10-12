@@ -123,59 +123,9 @@ const Convergence = () => {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap');
         
-        .convergence-container {
-          font-family: 'Montserrat', sans-serif;
-        }
-        
-        .convergence-header {
-          font-family: 'Bebas Neue', cursive;
-          font-size: clamp(4rem, 12vw, 8rem);
-          font-weight: 400;
-          margin-bottom: 1rem;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: #e0e6f9;
-          text-shadow: 0 0 15px rgba(0, 191, 255, 0.4), 0 0 25px rgba(135, 206, 235, 0.2);
-          animation: fadeIn 1s ease-out;
-          position: relative;
-          z-index: 20;
-        }
-        
         .sparkles-mask {
           mask-image: radial-gradient(ellipse 350px 150px at 50% 0%, transparent 20%, white);
           -webkit-mask-image: radial-gradient(ellipse 350px 150px at 50% 0%, transparent 20%, white);
-        }
-        
-        .description-text {
-          font-size: 1.3rem;
-          line-height: 1.9;
-          color: #cccccc;
-          font-weight: 300;
-          animation: fadeIn 1.5s ease-out;
-        }
-        
-        .highlight-text {
-          color: #87CEEB;
-          font-weight: 600;
-          text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
-        }
-        
-        .date-section {
-          margin-top: 3rem;
-          font-size: 1.8rem;
-          color: #87CEEB;
-          font-weight: 500;
-          animation: fadeIn 2s ease-out;
-          text-shadow: 0 0 20px rgba(135, 206, 235, 0.6);
-        }
-        
-        .date-highlight {
-          font-family: 'Bebas Neue', cursive;
-          font-size: 2.5rem;
-          letter-spacing: 2px;
-          font-weight: 400;
-          color: #fff;
-          text-shadow: 0 0 25px rgba(0, 191, 255, 0.8), 0 0 40px rgba(135, 206, 235, 0.6);
         }
         
         @keyframes fadeIn {
@@ -183,25 +133,29 @@ const Convergence = () => {
           to { opacity: 1; transform: translateY(0); }
         }
         
-        @media (max-width: 768px) {
-          .convergence-header {
-            font-size: clamp(3rem, 15vw, 5rem);
-          }
-          .description-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-          }
-          .date-section {
-            font-size: 1.4rem;
-          }
-          .date-highlight {
-            font-size: 1.8rem;
-          }
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out;
+        }
+        
+        .animate-fadeIn-slow {
+          animation: fadeIn 1.5s ease-out;
+        }
+        
+        .animate-fadeIn-slower {
+          animation: fadeIn 2s ease-out;
         }
       `}</style>
       
-      <div className="convergence-container max-w-[950px] text-center relative z-10">
-        <h1 className="convergence-header">CONVERGENCE</h1>
+      <div className="font-['Montserrat',sans-serif] max-w-[950px] text-center relative z-10">
+        <h1 
+          className="font-['Bebas_Neue',cursive] text-[clamp(2rem,12vw,8rem)] md:text-[clamp(2rem,15vw,5rem)] font-normal mb-4 tracking-[0.2em] uppercase relative z-20 animate-fadeIn"
+          style={{
+            color: '#e0e6f9',
+            textShadow: '0 0 15px rgba(0, 191, 255, 0.4), 0 0 25px rgba(135, 206, 235, 0.2)'
+          }}
+        >
+          CONVERGENCE
+        </h1>
         
         <div ref={containerRef} className="w-[40rem] max-w-[90vw] h-[10rem] relative mx-auto mb-0">
           <div 
@@ -232,17 +186,33 @@ const Convergence = () => {
             ref={canvasRef}
             className="absolute top-0 left-0 w-full h-full"
           />
-          {/* Removed bg-black from sparkles-mask */}
           <div className="sparkles-mask absolute inset-0 w-full h-full" />
         </div>
         
         <div className="mb-0">
-          <p className="description-text">
-            Witness the genesis of a new era. <span className="highlight-text">URJA SANGAM</span> is the ultimate convergence—a singular universe forged from the union of four legendary fests. Here, the raw power of <strong className="font-bold text-white">athleticism</strong>, the boundless innovation of <strong className="font-bold text-white">technology</strong>, the vibrant soul of <strong className="font-bold text-white">culture</strong>, and the profound impact of <strong className="font-bold text-white">community</strong> collide to create one unforgettable legacy.
+          <p className="text-[1.3rem] md:text-[1.1rem] leading-[1.9] md:leading-[1.7] text-[#cccccc] font-light animate-fadeIn-slow">
+            Witness the genesis of a new era. <span 
+              className="font-semibold"
+              style={{
+                color: '#87CEEB',
+                textShadow: '0 0 10px rgba(135, 206, 235, 0.5)'
+              }}
+            >URJA SANGAM</span> is the ultimate convergence—a singular universe forged from the union of four legendary fests. Here, the raw power of <strong className="font-bold text-white">athleticism</strong>, the boundless innovation of <strong className="font-bold text-white">technology</strong>, the vibrant soul of <strong className="font-bold text-white">culture</strong>, and the profound impact of <strong className="font-bold text-white">community</strong> collide to create one unforgettable legacy.
           </p>
           
-          <div className="date-section">
-            The saga unfolds from <span className="date-highlight">10th to 17th October</span>.
+          <div 
+            className="mt-12 text-[1.8rem] md:text-[1.4rem] font-medium animate-fadeIn-slower"
+            style={{
+              color: '#87CEEB',
+              textShadow: '0 0 20px rgba(135, 206, 235, 0.6)'
+            }}
+          >
+            The saga unfolds from <span 
+              className="font-['Bebas_Neue',cursive] text-[2.5rem] md:text-[1.8rem] tracking-[2px] font-normal text-white"
+              style={{
+                textShadow: '0 0 25px rgba(0, 191, 255, 0.8), 0 0 40px rgba(135, 206, 235, 0.6)'
+              }}
+            >10th to 16th October</span>.
           </div>
         </div>
       </div>

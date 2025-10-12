@@ -26,7 +26,7 @@ export function HeroSection() {
         muted
         loop
         playsInline
-        src="videos/Urjotsav/urjotsavback.mp4"
+        src="videos/Kaltarang/kaltarangback.mp4"
       />
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/40 z-10" />
@@ -41,13 +41,13 @@ export function HeroSection() {
           className="text-5xl md:text-9xl lg:text-[12rem] font-black uppercase tracking-widest"
           style={{
             background:
-              "linear-gradient(135deg, #06b6d4 0%, #3b82f6 25%, #0ea5e9 50%, #60a5fa 75%, #06b6d4 100%)",
+              "linear-gradient(135deg, #ef4444 0%, #dc2626 25%, #f87171 50%, #fb923c 75%, #ef4444 100%)",
             backgroundSize: "200% 100%",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
         >
-          URJOTSAV
+          KALTARANG
         </motion.h1>
 
         {/* Subtitle */}
@@ -55,7 +55,7 @@ export function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="text-xl md:text-2xl mt-4 text-cyan-200 tracking-wider"
+          className="text-xl md:text-2xl mt-4 text-red-200 tracking-wider"
         >
           Innovation & Technology Converge
         </motion.p>
